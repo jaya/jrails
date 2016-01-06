@@ -1,24 +1,27 @@
-## README
+#### Passos
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Retornar 200
+- Retornar Texto
+- Retornar Json
 
-Things you may want to cover:
 
-* Ruby version
+Retro dia 1
 
-* System dependencies
+Good
 
-* Configuration
+- Aprendemos a nos localizar no Metal + Modulos +3
+- Usar o Mini Test +1
+- Dinamica Dojo
+- Rails 5 :-)
 
-* Database creation
+Bad:
 
-* Database initialization
+- Não implementamos do zero +3
+- Remoto nao rolou bem +1
+- Editores
 
-* How to run the test suite
+Action Plan:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Implementar nossos modulos
+- Usar editor de codigo Online (Thiago)
+- Fazer o Dojo adicionando features Rails
