@@ -1,4 +1,8 @@
+require 'jrails/head'
+
 class HomeController < ActionController::Metal
+  
+  include Jrails::Head
   include AbstractController::Rendering
   include ActionController::Rendering
   include ActionController::Renderers::All
@@ -35,11 +39,4 @@ class HomeController < ActionController::Metal
     flash[:message] = 'flashman'
   end
   
-  private
-  
-  def head(status, options={})
-    self.status = status
-    self.content_type = options.delete(:content_type)
-    options.each { |key, value| self.headers[key] = value }
-  end
 end
