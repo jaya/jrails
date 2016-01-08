@@ -11,7 +11,7 @@ class HomeController < ActionController::Metal
   def index
     head :ok, content_type: 'text/plain'
   end
-
+  
   def text
     render plain: "pi-pi-pi-pi"
   end
