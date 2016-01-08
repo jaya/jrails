@@ -4,7 +4,6 @@
 - Retornar Texto
 - Retornar Json
 
-
 Retro dia 1
 
 Good
@@ -23,5 +22,5 @@ Bad:
 Action Plan:
 
 - Implementar nossos modulos
-- Usar editor de codigo Online (Thiago)
+- Usar editor de codigo Online (Teago)
 - Fazer o Dojo adicionando features Rails
