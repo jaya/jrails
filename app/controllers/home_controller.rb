@@ -1,12 +1,12 @@
 require 'jrails/head'
+require 'jrails/redirecting'
 
 class HomeController < ActionController::Metal
-  
   include Jrails::Head
+  include Jrails::Redirecting
   include AbstractController::Rendering
   include ActionController::Rendering
   include ActionController::Renderers::All
-  include ActionController::Redirecting
   include ActionController::Helpers
   include ActionController::Cookies
   include ActionController::Flash
@@ -38,5 +38,4 @@ class HomeController < ActionController::Metal
   def flashman
     flash[:message] = 'flashman'
   end
-  
 end
