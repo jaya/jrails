@@ -1,12 +1,11 @@
 require 'jrails/head'
 require 'jrails/redirecting'
+require 'jrails/rendering'
 
 class HomeController < ActionController::Metal
   include Jrails::Head
   include Jrails::Redirecting
-  #include AbstractController::Rendering
-  #include ActionController::Rendering
-  #include ActionController::Renderers::All
+  include Jrails::Rendering
   include ActionController::Helpers
   include ActionController::Cookies
   include ActionController::Flash
@@ -37,13 +36,5 @@ class HomeController < ActionController::Metal
 
   def flashman
     flash[:message] = 'flashman'
-  end
-  
-  def render(options)
-    self.response.body = options[:plain] if options.key?(:plain)
-    if options.key?(:json)
-      self.content_type = "application/json"
-      self.response.body = options[:json].to_json 
-    end
   end
 end
