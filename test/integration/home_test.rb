@@ -55,4 +55,18 @@ class HomeTest < ActionDispatch::IntegrationTest
 
     assert_equal({"flashes"=>{"message"=>"flashman"}}, session[:flash])
   end
+  
+  test "get /not_modifed" do
+    get "/not_modified"
+
+    assert_equal(200, response.status)
+    assert_equal('2000-10-20 10:20:12Z', response.headers['Last-Modified'])
+  end
+  
+  test "get /not_modified new object" do
+    date = Time.new(2000, 10, 20, 10, 20, 12).httpdate
+    get "/not_modified", headers: { 'HTTP_IF_MODIFIED_SINCE' => date }
+    
+    assert_response(304, response.status)
+  end
 end

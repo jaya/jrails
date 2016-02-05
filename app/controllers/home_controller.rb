@@ -1,14 +1,18 @@
 require 'jrails/head'
 require 'jrails/redirecting'
 require 'jrails/rendering'
+require 'jrails/cookies'
+require 'jrails/flash'
+require 'jrails/conditional_get'
 
 class HomeController < ActionController::Metal
   include Jrails::Head
   include Jrails::Redirecting
   include Jrails::Rendering
-  include ActionController::Helpers
-  include ActionController::Cookies
-  include ActionController::Flash
+  include Jrails::Cookies
+  include Jrails::Flash
+  include Jrails::ConditionalGet
+  # include ActionController::ConditionalGet
 
   def index
     head :ok, content_type: 'text/plain'
@@ -36,5 +40,12 @@ class HomeController < ActionController::Metal
 
   def flashman
     flash[:message] = 'flashman'
+  end
+  
+  def not_modified
+    # byebug
+    if stale?(last_modified: Time.parse('2000-10-20 10:20:10Z'))
+      head :ok, content_type: 'text/plain', 'Last-Modified' => '2000-10-20 10:20:12Z'
+    end
   end
 end

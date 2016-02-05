@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get 'jaya_header', to: 'home#jaya_header'
   get 'cookie', to: 'home#cookie'
   get 'flash', to: 'home#flashman'
+  get 'not_modified', to: 'home#not_modified'
 end
