@@ -47,3 +47,21 @@ Action Plan:
 * Mudar o horario para 2:30pm
 * Deixar jabra no bluetooth, e ir passando pra quem esta codando
  
+#### 12/02
+
+- good
+* dinamica piloto/co-piloto + 3
+* fila de dev do dojo ordenada + 1
+* desafio + 1
+* 
+
+- bad
+* não completamos a feature + 1
+* infra instavel
+* plateia não ficou queita quando devia
+* plateia não falou quando devia
+
+- Action Plan
+
+* Plateia podera falar qualquer horario
+* colocar repetidor no andar de baixo
