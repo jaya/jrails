@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get 'cookie', to: 'home#cookie'
   get 'flash', to: 'home#flashman'
   get 'not_modified', to: 'home#not_modified'
+  get 'rescue_from', to: 'home#rescue_from_action'
 end

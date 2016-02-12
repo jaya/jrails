@@ -69,4 +69,10 @@ class HomeTest < ActionDispatch::IntegrationTest
     
     assert_response(304, response.status)
   end
+  
+  test "get /rescue_from" do
+    get "/rescue_from"
+    
+    assert_response(400, response.status)
+  end
 end

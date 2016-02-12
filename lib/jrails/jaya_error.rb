@@ -1,0 +1,2 @@
+class JayaError < StandardError
+end
