@@ -9,15 +9,30 @@ require 'jrails/rescue_from'
 
 class HomeController < ActionController::Metal
   # include ActionController::Rescue
-  include Jrails::RescueFrom
+  # include Jrails::RescueFrom
   include Jrails::Head
   include Jrails::Redirecting
   include Jrails::Rendering
   include Jrails::Cookies
   include Jrails::Flash
   include Jrails::ConditionalGet
+
+  def process_action(method_name, *args)
+    super
+  rescue => e
+    handle_error(e)
+  end
   
-  rescue_from 'RuntimeError', with: :show_errors
+  def self.rescue_from(exception, hash)
+    @@rescue_options = hash.merge(exception: exception)
+  end
+  
+  def handle_error(exception)
+    e = @@rescue_options[:exception].is_a?(String) ?  @@rescue_options[:exception].constantize : @@rescue_options[:exception]
+    public_send(@@rescue_options[:with], exception) if exception.is_a?(e)
+  end
+
+  rescue_from 'StandardError', with: :show_errors
 
   def index
     head :ok, content_type: 'text/plain'
@@ -57,8 +72,6 @@ class HomeController < ActionController::Metal
   def rescue_from_action
     raise 'jaya'
   end
-  
-  protected
   
   def show_errors(exception)
     head :bad_request
