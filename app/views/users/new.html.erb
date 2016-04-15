@@ -1,0 +1,6 @@
+<%= form_for @user do |f| %>
+    <%= f.label User.human_attribute_name(:name) %>
+    <%= f.text_field :name %>
+    
+    <%= f.submit 'submit' %>
+<% end %>

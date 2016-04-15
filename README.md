@@ -65,3 +65,84 @@ Action Plan:
 
 * Plateia podera falar qualquer horario
 * colocar repetidor no andar de baixo
+
+#### 19/02 
+
+- good
+ 
+* Conseguimos terminar a feature +3
+* Bem mais sofisticado +2
+* Formato funcionou legal +1
+* Infra funcionou
+
+
+- bad
+
+* Breno caiu +1
+* Denovo deixamos de estabelecer uma ordem
+* Começamos mais tarde
+* Faltou colocar em modulo
+ 
+- Action Plan
+
+* Remoto deve ser copiloto de alguem presente
+* Começar sem a necessidade do França
+
+#### 04/03
+
+
+- good
+
+* Elias conseguiu fazer alguma coisa
+* Primeira vez Aracajaya Principal
+* Fila produtiva c/ tempo correto
+* Tema Mara <3
+ 
+- bad
+
+* Julio nao consegue participar
+* Comecou atrasado (15:00)
+* Erick e Augusto não participaram
+
+- Action Plan
+
+- Quem coda da share 
+- Michel vai resolver com Julio para o proximo Dojo
+- Começar pontualmente
+- Marcus & Thiago Cuidam da coordenação do Dojo
+
+
+#### 01/04
+
+- good
+
+* Mac Xulio
+* Conseguimos dar um passo legal com tempo reduzido
+* Tema Legal vamos continuar
+
+- bad
+
+* Tempo reduzido :-(
+* Atrasamos denovo
+* Nao rolou Dojos quando Michel viajou
+* Elias arregou
+* Screenhero nao rolou com muita gente
+* Nao participou todo mundo
+* Nao damos a prioridade
+
+- Action Plan
+
+* Michel montar a infra as 14:00
+* Dar mais prioridade 
+* Entender q sexta tem Dojo e se preparar
+* Elias partipará no próximo!
+
+Ideas para o proximo:
+
+- Definir atributos com tipos
+- Fazer a listagem dos items (.all)
+- Brincar de helper 
+
+
+
+

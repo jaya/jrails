@@ -178,6 +178,7 @@ DEPENDENCIES
   jquery-rails
   puma
   rails (>= 5.0.0.beta1, < 5.1)
+  redis
   spring
   sqlite3
   turbolinks
@@ -186,4 +187,4 @@ DEPENDENCIES
   web-console (~> 3.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
