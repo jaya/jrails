@@ -143,6 +143,22 @@ Ideas para o proximo:
 - Fazer a listagem dos items (.all)
 - Brincar de helper 
 
+#### 15/04
 
+- good
+
+* Julio conseguiu participar mesmo com o barco andando
+* Comecamos no horario
+
+- bad
+
+* Cloud9 perdeu tudo o que a gente tinha feito
+* So uma participacao de aracaju
+* Michel ainda nao separou um tempo pra explicar o projeto pra AracaJaya/JayaBlanca
+
+- Action Plan
+
+* sempre dar git push ao terminar o Dojo
+* Michel explicar o projeto aos que faltam
 
 
