@@ -161,4 +161,26 @@ Ideas para o proximo:
 * sempre dar git push ao terminar o Dojo
 * Michel explicar o projeto aos que faltam
 
+#### 13/05
+
+- good
+
+* Comecamos (perto) no horario
+* Resolvemos o problema da TV
+* Conseguimos fazer um bom refactoring
+* Esta comecando a ficar com a cara de uma lib
+
+- bad
+
+* Nao teve participacao remota
+* Internet caiu no meio
+* Mari sacaneou o dojo
+
+
+- Action Plan
+
+* Avisar a Mari do dojo
+* Usar o cabo ethernet
+* Proximos dojos evoluir com o `ActiveRedis::Base`
+* Franca vai abrir o dojo com os testes
 
