@@ -1,24 +1,20 @@
-class User
+require_relative '../../lib/active_redis/base'
+
+class User < ActiveRedis::Base
     extend ActiveModel::Naming
     extend ActiveModel::Translation
     include ActiveModel::Conversion
     include ActiveModel::Validations
-    
+
     validates :name, presence: true
     
-    def persisted?
-        false
-    end
-
-    attr_accessor :id, :name, :age, :date_of_birth
-    
-    def self.map(fields)
-        @@mapping ||= {} 
-        @@mapping[fields.keys.first] = fields[fields.keys.first]
-    end
-    
-    map({date_of_birth: :date, age: :fixnum})
-    
+    # map({age: :fixnum, date_of_birth: :date, id: :string, name: :string})
+   
+    map date_of_birth: :date
+    map age: :fixnum
+    map id: :string
+    map name: :string
+   
     def initialize(attributes = {})
         self.id = attributes[:id]
         self.name = attributes[:name]
@@ -37,31 +33,8 @@ class User
         user
     end
     
-    def save
-        if valid?
-            redis = Redis.new(port: 6379)
-            self.id = SecureRandom.uuid
-            redis.set("user_#{id}", self.to_json)
-        end
-    end
-    
     def to_param
         id.to_s
-    end
-    
-    def self.all
-        redis = Redis.new(port: 6379)
-        redis.keys.map { |key| load(key) }
-    end
-    
-    def self.find(id)
-        load("user_#{id}")
-    end
-    
-    def self.load(key)
-        redis = Redis.new(port: 6379)
-        data = redis.get(key)
-        deserialize(JSON.parse(data).symbolize_keys) if data.present?
     end
     
     def ==(other_user)
