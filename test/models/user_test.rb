@@ -26,6 +26,6 @@ class UserTest < ActiveSupport::TestCase
       user.save
       
       user = User.find(user.id)
-      assert_equal(user.date_of_birth.class, Date)
+      assert_equal(Date, user.date_of_birth.class)
   end
 end

@@ -16,7 +16,7 @@ module ActiveRedis
             if valid?
                 redis = Redis.new(port: 6379)
                 self.id = SecureRandom.uuid
-                redis.set("#{self.class.name}_#{id}", self.to_json)
+                redis.set("#{self.class.name}_#{id}", self.to_json(only: @@mapping.keys.map(&:to_s)))
             end
         end
         
@@ -44,6 +44,25 @@ module ActiveRedis
             redis = Redis.new(port: 6379)
             data = redis.get(key)
             deserialize(JSON.parse(data).symbolize_keys) if data.present?
+        end
+    
+        def self.delete_all
+            redis = Redis.new(port: 6379)
+            redis.flushdb
+        end
+        
+        def self.deserialize(attributes)
+            object = self.new
+            
+            attributes.each do |k, v|
+                object.send("#{k}=", v)
+            end
+            
+            if @@mapping[:date_of_birth] == :date
+              object.date_of_birth = Date.parse(attributes[:date_of_birth]) if attributes[:date_of_birth].present?
+            end
+            
+            object
         end
     end
 end
