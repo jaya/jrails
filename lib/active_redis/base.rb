@@ -4,29 +4,12 @@ module ActiveRedis
             false
         end
         
-        def self.map(fields)
-            @@mapping ||= {}
-            fields.each do |k , v| 
-                self.send(:attr_accessor, k)
-                @@mapping[k] = v
-            end
-        end
-        
         def save
             if valid?
                 redis = Redis.new(port: 6379)
                 self.id = SecureRandom.uuid
                 redis.set("#{self.class.name}_#{id}", self.to_json(only: @@mapping.keys.map(&:to_s)))
             end
-        end
-        
-        def self.all
-            redis = Redis.new(port: 6379)
-            redis.keys.map { |key| load(key) }
-        end
-        
-        def self.find(id)
-            load("#{name}_#{id}")
         end
         
         def to_param
@@ -37,32 +20,49 @@ module ActiveRedis
             self.id == other_object.id && \
             self.class == other_object.class
         end
-
-        private
-
-        def self.load(key)
-            redis = Redis.new(port: 6379)
-            data = redis.get(key)
-            deserialize(JSON.parse(data).symbolize_keys) if data.present?
-        end
-    
-        def self.delete_all
-            redis = Redis.new(port: 6379)
-            redis.flushdb
-        end
         
-        def self.deserialize(attributes)
-            object = self.new
-            
-            attributes.each do |k, v|
-                object.send("#{k}=", v)
+        class << self
+            def map(fields)
+                @@mapping ||= {}
+                fields.each do |k , v| 
+                    self.send(:attr_accessor, k)
+                    @@mapping[k] = v
+                end
             end
             
-            if @@mapping[:date_of_birth] == :date
-              object.date_of_birth = Date.parse(attributes[:date_of_birth]) if attributes[:date_of_birth].present?
+            def all
+                redis = Redis.new(port: 6379)
+                redis.keys.map { |key| load(key) }
             end
             
-            object
+            def find(id)
+                load("#{name}_#{id}")
+            end
+            
+            private
+        
+            def load(key)
+                redis = Redis.new(port: 6379)
+                data = redis.get(key)
+                deserialize(JSON.parse(data).symbolize_keys) if data.present?
+            end
+        
+            def delete_all
+                redis = Redis.new(port: 6379)
+                redis.flushdb
+            end
+            
+            def deserialize(attributes)
+                self.new.tap do |object|
+                    attributes.each do |k, v|
+                        if @@mapping[k] == :date
+                            object.send("#{k}=", Date.parse(v)) if v.present?
+                        else
+                            object.send("#{k}=", v)
+                        end
+                    end
+                end
+            end
         end
     end
 end
