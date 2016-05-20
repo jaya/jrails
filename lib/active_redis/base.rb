@@ -27,7 +27,7 @@ module ActiveRedis
         end
         
         def update(attributes)
-            self.serialize(attributes)
+            self.write_attributes(attributes)
             if valid?
                 redis = Redis.new(port: 6379)
                 redis.set("#{self.class.name}_#{id}", self.to_json(only: @@mapping.keys.map(&:to_s)))
@@ -39,7 +39,7 @@ module ActiveRedis
             redis.del("#{self.class.name}_#{id}")
         end
         
-        def serialize(attributes)
+        def write_attributes(attributes)
             attributes.each do |k, v|
                 if @@mapping[k] == :date
                     self.send("#{k}=", Date.parse(v)) if v.present?
@@ -82,7 +82,7 @@ module ActiveRedis
             
             def deserialize(attributes)
                 self.new.tap do |object|
-                    object.serialize(attributes)
+                    object.write_attributes(attributes)
                 end
             end
         end
