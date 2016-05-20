@@ -38,4 +38,15 @@ class UserTest < ActiveSupport::TestCase
     deleted_user = User.find(user_id)
     assert_equal(deleted_user, nil)
   end
+  
+  test 'test update user' do
+      user = User.new(name: 'Test')
+      user.save
+      
+      user = User.find(user.id)
+      user.update(name: 'Test 2')
+      
+      user_updated = User.find(user.id)
+      assert_equal('Test 2', user_updated.name)
+  end
 end
