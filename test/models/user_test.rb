@@ -18,6 +18,27 @@ class UserTest < ActiveSupport::TestCase
       
       user = User.find(user.id)
       assert_equal(user.age.class, Fixnum)
+      
+      user.age = "20"
+      assert_equal(20, user.age)
+      
+      user.age = 3.1
+      assert_equal(3, user.age)
+  end
+  
+  test 'name should be string' do
+      User.delete_all
+      user = User.new(name: 'Test')
+      user.save
+      
+      user = User.find(user.id)
+      assert_equal(user.name.class, String)
+      
+      user.name = 20
+      assert_equal("20", user.age)
+      
+      user.age = 3.1
+      assert_equal("3.1", user.age)
   end
   
   test 'date_of_birth should be date' do
@@ -27,6 +48,9 @@ class UserTest < ActiveSupport::TestCase
       
       user = User.find(user.id)
       assert_equal(Date, user.date_of_birth.class)
+      
+      user.date_of_birth = "1984-3-9"
+      assert_equal(Date.new(1984, 3, 9), user.date_of_birth)
   end
   
   test 'test delete key' do
