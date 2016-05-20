@@ -1,11 +1,6 @@
 require_relative '../../lib/active_redis/base'
 
 class User < ActiveRedis::Base
-    extend ActiveModel::Naming
-    extend ActiveModel::Translation
-    include ActiveModel::Conversion
-    include ActiveModel::Validations
-
     validates :name, presence: true
     
     # map({age: :fixnum, date_of_birth: :date, id: :string, name: :string})

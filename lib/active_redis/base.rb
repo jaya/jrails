@@ -1,5 +1,10 @@
 module ActiveRedis
     class Base
+        extend ActiveModel::Naming
+        extend ActiveModel::Translation
+        include ActiveModel::Conversion
+        include ActiveModel::Validations
+    
         def persisted?
             false
         end
@@ -21,6 +26,11 @@ module ActiveRedis
             self.class == other_object.class
         end
         
+        def destroy
+            redis = Redis.new(port: 6379)
+            redis.del("#{self.class.name}_#{id}")
+        end
+        
         class << self
             def map(fields)
                 @@mapping ||= {}
@@ -39,17 +49,17 @@ module ActiveRedis
                 load("#{name}_#{id}")
             end
             
+            def delete_all
+                redis = Redis.new(port: 6379)
+                redis.flushdb
+            end
+            
             private
         
             def load(key)
                 redis = Redis.new(port: 6379)
                 data = redis.get(key)
                 deserialize(JSON.parse(data).symbolize_keys) if data.present?
-            end
-        
-            def delete_all
-                redis = Redis.new(port: 6379)
-                redis.flushdb
             end
             
             def deserialize(attributes)

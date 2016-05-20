@@ -28,4 +28,14 @@ class UserTest < ActiveSupport::TestCase
       user = User.find(user.id)
       assert_equal(Date, user.date_of_birth.class)
   end
+  
+  test 'test delete key' do
+    user = User.new(name: 'Test')
+    user.save
+    user_id = user.id
+    user = User.find(user_id)
+    user.destroy
+    deleted_user = User.find(user_id)
+    assert_equal(deleted_user, nil)
+  end
 end
