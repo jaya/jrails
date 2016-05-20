@@ -72,6 +72,22 @@ module ActiveRedis
                 redis.flushdb
             end
             
+            def where(params = {})
+                all.select do |object|
+                    params.all? do |key, value|
+                        object.public_send(key).eql?(value)
+                    end
+                end
+            end
+            
+            def count
+                all.size
+            end
+            
+            def order(param)
+                all.sort_by{ |object| object.public_send(param) }
+            end
+            
             private
         
             def load(key)

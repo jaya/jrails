@@ -49,4 +49,41 @@ class UserTest < ActiveSupport::TestCase
       user_updated = User.find(user.id)
       assert_equal('Test 2', user_updated.name)
   end
+  
+  test '.where' do
+      User.delete_all
+      first_user = User.new(name: 'Test', date_of_birth: Date.new(1984, 3, 9))
+      first_user.save
+      second_user = User.new(name: 'Test 2', date_of_birth: Date.new(1984, 3, 9))
+      second_user.save
+      third_user = User.new(name: 'Test 3', date_of_birth: Date.new(1984, 4, 10))
+      third_user.save
+      
+      users = User.where(date_of_birth: Date.new(1984, 3, 9))
+
+      assert_equal(true, users.include?(first_user))
+      assert_equal(true, users.include?(second_user))
+      assert_equal(false, users.include?(third_user))
+  end
+  
+  test '.count' do
+    User.delete_all
+
+    User.new(name: 'Test', date_of_birth: Date.new(1983, 3, 9)).save
+    User.new(name: 'Test 2', date_of_birth: Date.new(1984, 3, 9)).save
+
+    assert_equal(2, User.count)
+  end
+  
+  test '.order' do
+    User.delete_all
+    first_user = User.new(name: 'Test', date_of_birth: Date.new(1983, 3, 9))
+    first_user.save
+    second_user = User.new(name: 'Test 2', date_of_birth: Date.new(1984, 3, 9))
+    second_user.save
+
+    users = User.order(:name)
+
+    assert_equal([first_user, second_user], users)
+  end
 end
