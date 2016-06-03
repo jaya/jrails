@@ -52,9 +52,25 @@ module ActiveRedis
         class << self
             def map(fields)
                 @@mapping ||= {}
-                fields.each do |k , v| 
+                
+                fields.each do |k , v|
                     self.send(:attr_accessor, k)
                     @@mapping[k] = v
+
+                    define_method("#{k}=") do |value|
+                        instance_variable_set("@#{k}".to_sym, Date.parse(value)) if value.is_a?(String)
+                        instance_variable_set("@#{k}".to_sym, value) if value.is_a?(Date)
+                    end if v == :date
+
+                    define_method("#{k}=") do |value|
+                        instance_variable_set("@#{k}".to_sym, value.to_i) if value.is_a?(String)
+                        instance_variable_set("@#{k}".to_sym, value) if value.is_a?(Fixnum)
+                        instance_variable_set("@#{k}".to_sym, value.to_i) if value.is_a?(Float)
+                    end if v == :fixnum
+
+                    define_method("#{k}=") do |value|
+                        instance_variable_set("@#{k}".to_sym, value.to_s)
+                    end if v == :string
                 end
             end
             

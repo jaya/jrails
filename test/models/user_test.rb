@@ -35,10 +35,11 @@ class UserTest < ActiveSupport::TestCase
       assert_equal(user.name.class, String)
       
       user.name = 20
-      assert_equal("20", user.age)
+      assert_equal("20", user.name)
       
-      user.age = 3.1
-      assert_equal("3.1", user.age)
+      
+      user.name = 3.1
+      assert_equal("3.1", user.name)
   end
   
   test 'date_of_birth should be date' do
