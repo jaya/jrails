@@ -42,6 +42,11 @@ class UserTest < ActiveSupport::TestCase
       assert_equal("3.1", user.name)
   end
   
+   test 'name is mandatory' do
+      user = User.new
+      assert_equal(user.valid?, false)
+  end
+  
   test 'date_of_birth should be date' do
       User.delete_all
       user = User.new(name: 'Test', date_of_birth: Date.new(1984, 3, 9))

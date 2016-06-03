@@ -53,8 +53,13 @@ module ActiveRedis
             def map(fields)
                 @@mapping ||= {}
                 
-                fields.each do |k , v|
+                k, v = fields.first
+                
+                #fields.each do |k , v|
                     self.send(:attr_accessor, k)
+                    # TODO: validar somente o que vem do map (paramos aki!)
+                    # self.send(:validates, k, { presence: true })
+                        
                     @@mapping[k] = v
 
                     define_method("#{k}=") do |value|
@@ -71,7 +76,7 @@ module ActiveRedis
                     define_method("#{k}=") do |value|
                         instance_variable_set("@#{k}".to_sym, value.to_s)
                     end if v == :string
-                end
+                #end
             end
             
             def all
